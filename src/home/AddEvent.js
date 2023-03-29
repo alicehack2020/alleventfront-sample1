@@ -1,6 +1,8 @@
 import axios from 'axios'
 import React, { useState } from 'react'
 import "./AddEvent.css"
+import { ref, uploadBytesResumable, getDownloadURL } from "firebase/storage";
+import storage from "../config/firebaseconfig"
 const AddEvent = () => {
   const [data, setData] = useState({
     eventName:"",
@@ -13,8 +15,47 @@ const AddEvent = () => {
     category:"",
     bannerImage:""
   })
+  const [percent, setPercent] = useState(0);
+  const [file, setFile] = useState("");
 
-  const saveData = async() => {
+  function handleChange(event) {
+    setFile(event.target.files[0])
+    
+  }
+
+  const handleUpload = () => {
+    if (!file) {
+        alert("Please upload an image first!");
+    }
+
+    const storageRef = ref(storage, `/files/${file.name}`);
+
+    // progress can be paused and resumed. It also exposes progress updates.
+    // Receives the storage reference and the file to upload.
+    const uploadTask = uploadBytesResumable(storageRef, file);
+
+    uploadTask.on(
+        "state_changed",
+        (snapshot) => {
+            const percent = Math.round(
+                (snapshot.bytesTransferred / snapshot.totalBytes) * 100
+            );
+
+            // update progress
+            setPercent(percent);
+        },
+        (err) => console.log(err),
+        () => {
+            // download url
+            getDownloadURL(uploadTask.snapshot.ref).then((url) => {
+              setData({ ...data,bannerImage: url })
+            });
+        }
+    );
+
+
+   };
+  const saveData = async () => {
       try {
          await axios.post("http://localhost:8000/api/event/add", data).then((res) => {
           console.log(res)
@@ -28,9 +69,7 @@ const AddEvent = () => {
 
 
   
-  const uploadBanner = () => {
-    console.log(data)
-}
+  
   return (
     <div className='add_Event_Main'>
       <div className='headingadd'>ADD EVENTS</div>
@@ -79,9 +118,16 @@ const AddEvent = () => {
  
            <textarea type="text" placeHolder="Enter event desciprion" className='description' value={data.description} onChange={(e) => setData({ ...data, description: e.target.value })} />
           <div className='add_form_button'>
-            <button onClick={() => uploadBanner()}>Upload Banner</button>
-            <button onClick={()=>saveData()}>submit</button>
-          </div>  
+          <div>
+              <p>Select Banner</p>
+                <input type="file" onChange={handleChange} accept="image/*" />
+                <button onClick={handleUpload}>Upload Banner</button>
+              <p>{percent} "% done"</p>
+           </div>
+            {/* <button onClick={() => uploadBanner()}>Upload Banner</button> */}
+           
+      </div>  
+      <button onClick={()=>saveData()}>Submit</button>
 
       
       </div>
