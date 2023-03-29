@@ -1,0 +1,12 @@
+.add_div{
+  display: flex;
+  flex-direction: column;
+  width:400px;
+}
+
+input,button{
+    paddin:20px;
+    height:30px;
+    margin:10px;
+     
+}

@@ -1,0 +1,22 @@
+.nav_header{
+  padding:10px; 
+  display: flex;
+}
+
+.nav_header > nav_link{
+  padding:10px; 
+  
+}
+.nav_link{
+  padding:10px; 
+  text-decoration: none;
+}
+ 
+
+.nav_header >nav_link:hover{
+   pointer:cursor; 
+}
+
+.demo{
+  
+}
