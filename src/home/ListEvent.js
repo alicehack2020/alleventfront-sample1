@@ -43,9 +43,19 @@ const ListEvent = () => {
   },[list])
   
 
-   
+  const updateLocationCategory = (who,arr) => {
+    if (who === 'location')
+    {
 
+      setLocationFilter(arr) 
+    }
+    else {
+      setCategoryFilter(arr)
+     
+    }
+   }
 
+  
   const loadLocation = () => {
     let objLocation = {}
     let objCategory = {}
@@ -76,30 +86,28 @@ const ListEvent = () => {
     setCategory(Object.keys(objCategory))
   }
 
-
   const sortData = (type) => {
     setSelectedClient(type);
     
     if (type === 'city')
     {
-      let sortedProducts = CompleteData.sort(
+      let sortedProducts = data.sort(
         (p1, p2) => (p1.location < p2.location) ? 1 : (p1.location > p2.location) ? -1 : 0);
       setData(sortedProducts)
       
     }
     else if (type === 'date')
     {
-      let sortedProducts = CompleteData.sort(
+      let sortedProducts = data.sort(
         (p1, p2) => (p1.date < p2.date) ? 1 : (p1.date > p2.date) ? -1 : 0);
       setData(sortedProducts)
        
     }
     else if (type === 'category')
     {
-      let sortedProducts = CompleteData.sort(
+      let sortedProducts = data.sort(
         (p1, p2) => (p1.category < p2.category) ? 1 : (p1.category > p2.category) ? -1 : 0);
-      setData(sortedProducts)
-       
+      setData(sortedProducts)   
     }
      
   }
@@ -123,8 +131,9 @@ const ListEvent = () => {
         let arr=[]
           arr = locationFilter.filter((item) => {
           return item !== key;
-        })
-        setLocationFilter(arr) 
+          })
+          updateLocationCategory("location",arr)
+       
       }
       else {
         locationFilter.push(key)
@@ -149,8 +158,8 @@ const ListEvent = () => {
       {
         let arr = categoryFilter.filter(function(item) {
           return item !== key
-         })
-        setCategoryFilter(arr)
+        })
+        updateLocationCategory("category",arr)
       }
       else {
         categoryFilter.push(key)
@@ -159,13 +168,12 @@ const ListEvent = () => {
   
     }
     
+   
     let res = CompleteData.filter(obj =>
       Object.entries(filter).every(([prop, find]) => find.includes(obj[prop])));
     setData(res) 
-
-    console.log("categoryFilter",categoryFilter)
-    console.log("locationFilter",locationFilter)
-
+    
+    
   }
 
   return (
@@ -185,10 +193,12 @@ const ListEvent = () => {
           <div>
             filter by city
             {location.map((key) => (
-             <div key={key} className="check_box" onClick={()=>filterData("city",key)}>
+             <div key={key} className="check_box">
                 <input type="checkbox"
                   name="subscribe"
-                  value="newsletter"/> <label>{key}: ({locationValue[key]})</label>
+                  value="newsletter"
+                  onClick={()=>filterData("city",key)}
+                  /> <label>{key}: ({locationValue[key]})</label>
              </div>
             ))}
           </div>
