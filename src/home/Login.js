@@ -1,18 +1,18 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import { useNavigate } from 'react-router-dom'
 import "./Login.css"
 import gmail from "../img/gmail.png"
 import event from "../img/event.svg"
 import festival from "../img/festival.svg"
-import { GoogleLogin, GoogleLogout } from 'react-google-login';
+import { GoogleLogin} from 'react-google-login';
 // import { GoogleLogin } from '@react-oauth/google';
-
+import { gapi } from 'gapi-script'
 const Login = () => {
 const Navigate=useNavigate()
 const clientId = "164254241743-1mnk3o9k8v4p63851ktbah3kuae0oo9i.apps.googleusercontent.com";
   
   const onLoginSuccess = (res) => {
-    console.log('Login Success:', res.profileObj);
+    console.log(res)
     Navigate("/list")
 };
 
