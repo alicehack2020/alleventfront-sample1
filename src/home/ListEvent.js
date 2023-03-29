@@ -12,7 +12,8 @@ const ListEvent = () => {
   const [selectedClient, setSelectedClient] = useState('date');
   const [locationFilter,setLocationFilter]=useState([])
   const [categoryFilter,setCategoryFilter]=useState([])
- 
+  const [date,setDate]=useState()
+  
   let filter = {
     "category": categoryFilter,
     "location": locationFilter,
@@ -46,14 +47,12 @@ const ListEvent = () => {
   const updateLocationCategory = (who,arr) => {
     if (who === 'location')
     {
-
       setLocationFilter(arr) 
     }
     else {
       setCategoryFilter(arr)
-     
     }
-   }
+  }
 
   
   const loadLocation = () => {
@@ -167,13 +166,17 @@ const ListEvent = () => {
       }
   
     }
-    
-   
     let res = CompleteData.filter(obj =>
       Object.entries(filter).every(([prop, find]) => find.includes(obj[prop])));
     setData(res) 
+  }
+
+  const findbyDate = () => {
     
-    
+    let arr = CompleteData.filter((item) => {
+      return item.date === date;
+    })
+    setData(arr)
   }
 
   return (
@@ -186,6 +189,11 @@ const ListEvent = () => {
           <option>city</option>
           <option>category</option>
         </select>
+      </div>
+      <div>
+        <label htmlFor="">Select Date for event</label>
+        <input type="date" placeholder='select date' value={date} onChange={(e)=>{setDate(e.target.value)}} />
+        <button onClick={findbyDate}>find</button>
       </div>
       <div className='list_event_filter_main'>
         <div>
