@@ -1,22 +1,25 @@
 .nav_header{
-  padding:10px; 
+  padding:20px; 
   display: flex;
+  justify-content: space-between;
 }
 
-.nav_header > nav_link{
-  padding:10px; 
-  
+.nav_header{
+  background-color: aliceblue;
 }
+
 .nav_link{
+  color: black;
   padding:10px; 
   text-decoration: none;
+  font-size: medium;
+  /* border: 1px solid blue; */
+  margin: 5px;
+  box-shadow: rgba(50, 50, 93, 0.25) 0px 2px 5px -1px, rgba(0, 0, 0, 0.3) 0px 1px 3px -1px;
 }
  
 
-.nav_header >nav_link:hover{
-   pointer:cursor; 
+.nav_header > nav_link:hover{
+    cursor: pointer; 
 }
-
-.demo{
-  
-}
+ 

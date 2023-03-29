@@ -1,11 +1,22 @@
+.list_Main{
+    margin: 20px;
+}
+.headingadd{
+    display: grid;
+    justify-content: center;
+}
 .event_list_Main{
     display: grid;
     grid-template-columns:repeat(3, 1fr);
-    gap:10px;
+    gap:20px;
     align-items: center;
+    margin-left: 50px;
+}
+.event_list_Main>div{
+    box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 4px;
 }
 .banner{
-    width:100px
+    width:250px
 }
 
 .list_event_filter_main{
@@ -15,6 +26,53 @@
     display:flex;
     align-items: center;
 }
-.demo{
+.event_list_find{
+    display:flex;
+    justify-content: right;
+    align-items: center; 
+}
+
+.normalFlexColumn{
+    display: flex;
+    flex-direction: column;
+}
+.event_list_find{
+    margin-right: 30px;
     
+}
+
+.event_list_find > button{
+     width: 80px;
+     padding: 10px;
+     font-size: medium;
+     border-radius: 5px;
+     background-color: black;
+     color: white;
+     cursor: pointer; 
+     margin-bottom: 10px;
+     
+}
+.check_box input:hover{
+    cursor: pointer;
+}
+
+.event_list_find select{
+padding: 10px;
+border-radius: 5px;
+font-size: medium;
+}
+
+.Date{
+    padding: 10px;
+    border-radius: 5px;
+    font-size: medium;
+    border: 1px solid black;
+}
+
+
+
+.generalFlex{
+    display: flex;
+    justify-content: space-between;
+    margin: 10px;
 }

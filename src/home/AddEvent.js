@@ -4,7 +4,8 @@ import "./AddEvent.css"
 const AddEvent = () => {
   const [data, setData] = useState({
     eventName:"",
-    date:"",
+    startdate:"",
+    enddate:"",
     startTime:"",
     endTime:"",
     location:"",
@@ -31,20 +32,60 @@ const AddEvent = () => {
     console.log(data)
 }
   return (
-    <>
-      <div>Add Events</div>
+    <div className='add_Event_Main'>
+      <div className='headingadd'>ADD EVENTS</div>
       <div className='add_div'>
           <input type="text"  placeHolder="Enter event name" value={data.eventName} onChange={(e) => setData({ ...data, eventName: e.target.value })} />
-          <input type="date" placeHolder="Enter event date"  value={data.date} onChange={(e) => setData({ ...data, date: e.target.value })} />
-          <input type="time" placeHolder="Enter event start time"  value={data.startTime} onChange={(e) => setData({ ...data, startTime: e.target.value })} />
+        <div className='date_div'>
+          <div>
+            <label>Start Date</label>
+            <input type="date" placeHolder="Enter event date" value={data.startdate} onChange={(e) => setData({ ...data, startdate: e.target.value })} />
+            <label htmlFor="">Start Time</label>
+            <input type="time" placeHolder="Enter event start time" value={data.startTime} onChange={(e) => setData({ ...data, startTime: e.target.value })} />
+          </div> 
+          
+          <div>
+            <label>End Date</label>
+            <input type="date" placeHolder="Enter event date" value={data.enddate} onChange={(e) => setData({ ...data, enddate: e.target.value })} />
+            <label htmlFor="">End Time</label>
           <input type="time" placeHolder="Enter event end time"  value={data.endTime} onChange={(e) => setData({ ...data, endTime: e.target.value })} />
-          <input type="text" placeHolder="Enter event location"  value={data.location} onChange={(e) => setData({ ...data, location: e.target.value })} />
-          <input type="text" placeHolder="Enter event desciprion"  value={data.description} onChange={(e) => setData({ ...data, description: e.target.value })} />
-          <input type="text" placeHolder="Enter event category"  value={data.category} onChange={(e) => setData({ ...data, category: e.target.value })} />
-          <button onClick={()=>uploadBanner()}>Upload Banner</button>
-          <button onClick={()=>saveData()}>submit</button>
+          </div>
+        </div>
+        
+         
+        <select value={data.location} onChange={(e) => setData({ ...data, location: e.target.value })}>
+           <option value="">Select Event Location</option>
+            <option>Pune</option>
+            <option>Mumbai</option>
+            <option>Nashik</option>
+            <option>Gujarat</option>
+            <option>Aurangabad</option>
+          </select>
+        
+
+        <select value={data.category} onChange={(e) => setData({ ...data, category: e.target.value })}>
+           <option value="">Select Event Category</option>
+            <option>Music</option>
+            <option>Dance</option>
+            <option>Drama</option>
+            <option>Festival</option>
+            <option>Talk</option>
+          </select>
+        </div>
+
+
+          {/* <input type="text" placeHolder="Enter event location"  value={data.location} onChange={(e) => setData({ ...data, location: e.target.value })} /> */}
+          {/* <input type="text" placeHolder="Enter event category"  value={data.category} onChange={(e) => setData({ ...data, category: e.target.value })} /> */}
+ 
+           <textarea type="text" placeHolder="Enter event desciprion" className='description' value={data.description} onChange={(e) => setData({ ...data, description: e.target.value })} />
+          <div className='add_form_button'>
+            <button onClick={() => uploadBanner()}>Upload Banner</button>
+            <button onClick={()=>saveData()}>submit</button>
+          </div>  
+
+      
       </div>
-    </>
+    
 
   )
 }

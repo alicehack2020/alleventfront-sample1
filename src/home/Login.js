@@ -1,6 +1,9 @@
 import React from 'react'
 import { useNavigate } from 'react-router-dom'
-
+import "./Login.css"
+import gmail from "../img/gmail.png"
+import event from "../img/event.svg"
+import festival from "../img/festival.svg"
 const Login = () => {
 const Navigate=useNavigate()
   const sendOnHome = () => {
@@ -8,9 +11,26 @@ const Navigate=useNavigate()
   } 
   return (
     <>
-      <h1>login</h1>
-      <button onClick={()=>sendOnHome()}>gmail</button>
-     </>
+      <div className='loginMain'>
+        <div>
+           <img src={event} alt="" className='homeImage'/>
+        </div>
+        <div className='loginForm'>
+          <div className='gmailButton'>
+            <img src={gmail} alt="" />
+            <button onClick={()=>sendOnHome()}>Login with Gmail</button>
+          </div>
+
+          
+        </div>
+      </div>
+      <div className='headingHome'>
+        <p>Create Your Event For Free Let's Join</p>
+      </div>
+      
+      
+    
+    </>
   )
 }
 

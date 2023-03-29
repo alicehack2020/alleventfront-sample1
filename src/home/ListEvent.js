@@ -98,7 +98,7 @@ const ListEvent = () => {
     else if (type === 'date')
     {
       let sortedProducts = data.sort(
-        (p1, p2) => (p1.date < p2.date) ? 1 : (p1.date > p2.date) ? -1 : 0);
+        (p1, p2) => (p1.Startdate < p2.Startdate) ? 1 : (p1.Startdate > p2.Startdate) ? -1 : 0);
       setData(sortedProducts)
        
     }
@@ -174,25 +174,26 @@ const ListEvent = () => {
   const findbyDate = () => {
     
     let arr = CompleteData.filter((item) => {
-      return item.date === date;
+      return item.Startdate === date || item.Enddate === date;
     })
     setData(arr)
   }
 
   return (
-    <>
+    <div className='list_Main'>
       <div>Event List</div>
-      <div>
-        sort
-        <select value={selectedClient} onChange={(e)=>sortData(e.target.value)}>
-          <option>date</option>
-          <option>city</option>
-          <option>category</option>
-        </select>
-      </div>
-      <div>
-        <label htmlFor="">Select Date for event</label>
-        <input type="date" placeholder='select date' value={date} onChange={(e)=>{setDate(e.target.value)}} />
+      <div className='event_list_find'>
+        <div className='normalFlexColumn'>
+          
+          <select value={selectedClient} onChange={(e)=>sortData(e.target.value)}>
+            <option>date</option>
+            <option>city</option>
+            <option>category</option>
+          </select>
+        </div>
+        <div className='normalFlexColumn'>
+           <input type="date" placeholder='select date' value={date} onChange={(e)=>{setDate(e.target.value)}} className="Date"/>
+        </div>
         <button onClick={findbyDate}>find</button>
       </div>
       <div className='list_event_filter_main'>
@@ -228,13 +229,43 @@ const ListEvent = () => {
             {
               data.map((e) => {
                 return <div>
-                  <p>{e.eventName}</p>
-                  <p>{e.date}</p>
-                  <p>{e.startTime}</p>
-                  <p>{e.endTime}</p>
-                  <p>{e.location}</p>
-                  <p>{e.category}</p>
-                  <div><img src={e.bannerImage} alt="" className='banner'/></div>
+                <div><img src={e.bannerImage} alt="" className='banner'/></div>
+                  <div>
+                    <div className='generalFlex'>
+                      <p>Event Name</p>
+                      <p>{e.eventName}</p>
+                    </div>
+
+                    <div className='generalFlex'>
+                      <p>Start Date</p>
+                      <p>Start Time</p>
+                    </div>
+
+                    <div className='generalFlex'>
+                      <p>{e.Startdate}</p>
+                      <p>{e.startTime}</p>
+                    </div>
+
+                    <div className='generalFlex'>
+                      <p>End Date</p>
+                      <p>End Time</p>
+                    </div>
+                    <div className='generalFlex'>
+                      <p>{e.Enddate}</p>
+                      <p>{e.endTime}</p>
+                    </div>
+                    
+                    <div className='generalFlex'>
+                      <p htmlFor="">Location</p>
+                      <p>{e.location}</p>
+                    </div>
+                    <div className='generalFlex'>
+                    <p htmlFor="">Category</p>
+                      <p>{e.category}</p>
+                    </div>
+                  </div>
+                  
+                 
                 </div>
               })
           }
@@ -242,7 +273,7 @@ const ListEvent = () => {
       </div>
 
      
-    </>
+    </div>
   )
 }
 
