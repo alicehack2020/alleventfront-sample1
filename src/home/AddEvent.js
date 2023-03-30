@@ -3,6 +3,9 @@ import React, { useState } from 'react'
 import "./AddEvent.css"
 import { ref, uploadBytesResumable, getDownloadURL } from "firebase/storage";
 import storage from "../config/firebaseconfig"
+import { Ring } from 'react-awesome-spinners'
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css'
 const AddEvent = () => {
   const [data, setData] = useState({
     eventName:"",
@@ -15,6 +18,7 @@ const AddEvent = () => {
     category:"",
     bannerImage:""
   })
+  const [loading, setLoading] = useState(false)
   const token =JSON.parse(localStorage.getItem('token'))
   const [percent, setPercent] = useState(0);
   const [file, setFile] = useState("");
@@ -57,14 +61,21 @@ const AddEvent = () => {
 
    };
   const saveData = async () => {
+    setLoading(true)
       try {
          await axios.post("http://localhost:8000/api/event/add", data,{ headers: {"Authorization" : `Bearer ${token}`} }).then((res) => {
-          console.log(res)
+           setLoading(false)
+           toast.success("Event Added Sucessfully!", {
+            position: toast.POSITION.TOP_LEFT
+          });
          }).catch((error) => {
-          console.log(error)
+          toast.error("All Filds Are Required !", {
+            position: toast.POSITION.TOP_LEFT
+          });
+          setLoading(false)
         })
       } catch (error) {
-        
+       console.log(error)
       }
   }
 
@@ -72,8 +83,12 @@ const AddEvent = () => {
   
   
   return (
-    <div className='add_Event_Main'>
-      <div className='headingadd'>ADD EVENTS</div>
+    <>
+      {
+        loading === true ?<Ring></Ring> : <>
+        <div className='add_Event_Main'>
+            <div className='headingadd'>ADD EVENTS</div>
+            <ToastContainer />
       <div className='add_div'>
           <input type="text"  placeholder="Enter event name" value={data.eventName} onChange={(e) => setData({ ...data, eventName: e.target.value })} />
         <div className='date_div'>
@@ -114,24 +129,24 @@ const AddEvent = () => {
         </div>
 
 
-          {/* <input type="text" placeHolder="Enter event location"  value={data.location} onChange={(e) => setData({ ...data, location: e.target.value })} /> */}
-          {/* <input type="text" placeHolder="Enter event category"  value={data.category} onChange={(e) => setData({ ...data, category: e.target.value })} /> */}
- 
+       
            <textarea type="text" placeholder="Enter event desciprion" className='description' value={data.description} onChange={(e) => setData({ ...data, description: e.target.value })} />
           <div className='add_form_button'>
           <div>
               <p>Select Banner</p>
-                <input type="file" onChange={handleChange} accept="image/*" />
+                <input type="file" onChange={handleChange} accept="image/*" className='selectfile'/>
                 <button onClick={handleUpload}>Upload Banner</button>
               <p>{percent} "% done"</p>
            </div>
-            {/* <button onClick={() => uploadBanner()}>Upload Banner</button> */}
-           
+            
       </div>  
       <button onClick={()=>saveData()} className='submitButton'>Submit</button>
-
-      
-      </div>
+    </div>
+        </>
+      }
+    
+    </>
+  
     
 
   )

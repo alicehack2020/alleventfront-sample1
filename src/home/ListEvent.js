@@ -238,8 +238,11 @@ const ListEvent = () => {
             <div className='event_list_Main'>
             {
               data.map((e) => {
-                return <div>
-                <div><img src={e.bannerImage} alt="" className='banner'/></div>
+                return <div className='CardDiv'>
+                  <div>
+                     <img src={e.bannerImage} alt="" className='banner'/>
+                  </div> 
+                  <div>
                   <div>
                     <div className='generalFlex'>
                       <p>Event Name</p>
@@ -274,6 +277,8 @@ const ListEvent = () => {
                       <p>{e.category}</p>
                     </div>
                   </div>
+                  </div>
+                  
                   
                  
                 </div>
