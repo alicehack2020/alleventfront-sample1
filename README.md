@@ -3,7 +3,7 @@ FrontEnd Code:https://github.com/alicehack2020/alleventfront-sample1
 BackEndCode:https://github.com/alicehack2020/alleventsbackend-sample1
 
 # Live
-FrontEnd:alleventfront-sample1.vercel.app
+FrontEnd:alleventfront-sample1.vercel.app/
 BackEnd:https://alleventbackend.onrender.com/
 
 
