@@ -13,7 +13,12 @@ const ListEvent = () => {
   const [locationFilter,setLocationFilter]=useState([])
   const [categoryFilter,setCategoryFilter]=useState([])
   const [date,setDate]=useState()
+   
   
+  const localUserData =JSON.parse(localStorage.getItem('user'))
+  const token =JSON.parse(localStorage.getItem('token'))
+  
+
   let filter = {
     "category": categoryFilter,
     "location": locationFilter,
@@ -21,7 +26,7 @@ const ListEvent = () => {
  
   const loadData = async () => {
     try {
-      await axios.post("http://localhost:8000/api/event/list").then((res) => {
+      await axios.post("http://localhost:8000/api/event/list", {},{ headers: {"Authorization" : `Bearer ${token}`} }).then((res) => {
         setList(res.data.list)
         setCompleteData(res.data.list)
         setData(res.data.list)
@@ -35,6 +40,7 @@ const ListEvent = () => {
   
 
   useEffect(() => {
+    
     loadData()
   },[])
  
@@ -98,7 +104,7 @@ const ListEvent = () => {
     else if (type === 'date')
     {
       let sortedProducts = data.sort(
-        (p1, p2) => (p1.Startdate < p2.Startdate) ? 1 : (p1.Startdate > p2.Startdate) ? -1 : 0);
+        (p1, p2) => (p1.startdate < p2.startdate) ? 1 : (p1.startdate > p2.startdate) ? -1 : 0);
       setData(sortedProducts)
        
     }
@@ -174,14 +180,18 @@ const ListEvent = () => {
   const findbyDate = () => {
     
     let arr = CompleteData.filter((item) => {
-      return item.Startdate === date || item.Enddate === date;
+      return item.startdate === date || item.snddate === date;
     })
     setData(arr)
   }
 
   return (
     <div className='list_Main'>
-      <div>Event List</div>
+      <div>
+        <p>
+          Hi {localUserData?.name} welcome to AllEvents
+        </p>
+      </div>
       <div className='event_list_find'>
         <div className='normalFlexColumn'>
           
@@ -242,7 +252,7 @@ const ListEvent = () => {
                     </div>
 
                     <div className='generalFlex'>
-                      <p>{e.Startdate}</p>
+                      <p>{e.startdate}</p>
                       <p>{e.startTime}</p>
                     </div>
 
@@ -251,7 +261,7 @@ const ListEvent = () => {
                       <p>End Time</p>
                     </div>
                     <div className='generalFlex'>
-                      <p>{e.Enddate}</p>
+                      <p>{e.enddate}</p>
                       <p>{e.endTime}</p>
                     </div>
                     
