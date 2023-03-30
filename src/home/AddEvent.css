@@ -67,4 +67,7 @@
   background-color: black;
   border-radius: 3px;
 }
+.selectfile:hover{
+cursor: pointer;
+}
 

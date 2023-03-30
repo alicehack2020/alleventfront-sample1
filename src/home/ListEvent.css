@@ -76,3 +76,11 @@ font-size: medium;
     justify-content: space-between;
     margin: 10px;
 }
+
+.CardDiv{
+    height: 500px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    padding: 10px;
+}
