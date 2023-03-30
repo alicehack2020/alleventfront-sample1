@@ -15,7 +15,7 @@ const clientId = "164254241743-1mnk3o9k8v4p63851ktbah3kuae0oo9i.apps.googleuserc
 
  const onLoginSuccess = async(res) => {
     console.log(res)
-    await axios.post("http://localhost:8000/api/user/register", res.profileObj).then((res) => {
+    await axios.post("https://alleventbackend.onrender.com/api/user/register", res.profileObj).then((res) => {
       console.log(res)
        
       localStorage.setItem('token', JSON.stringify(res.data.data.token))

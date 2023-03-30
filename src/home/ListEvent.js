@@ -26,7 +26,7 @@ const ListEvent = () => {
  
   const loadData = async () => {
     try {
-      await axios.post("http://localhost:8000/api/event/list", {},{ headers: {"Authorization" : `Bearer ${token}`} }).then((res) => {
+      await axios.post("https://alleventbackend.onrender.com/api/event/list", {},{ headers: {"Authorization" : `Bearer ${token}`} }).then((res) => {
         setList(res.data.list)
         setCompleteData(res.data.list)
         setData(res.data.list)
