@@ -4,46 +4,42 @@ import "./Login.css"
 import gmail from "../img/gmail.png"
 import event from "../img/event.svg"
 import festival from "../img/festival.svg"
-import { GoogleLogin} from 'react-google-login';
+import { GoogleLogin } from 'react-google-login';
 import axios from 'axios'
-// import { GoogleLogin } from '@react-oauth/google';
-import jwt_decode from "jwt-decode";
-import { gapi } from "gapi-script" 
 const Login = () => {
 const Navigate=useNavigate()
-const clientId = "164254241743-1mnk3o9k8v4p63851ktbah3kuae0oo9i.apps.googleusercontent.com";
+ const getUser = async () => {
+  try {
+    const url = `${process.env.REACT_APP_API_URL}/auth/login/success`;
+    await axios.get(url, { withCredentials: true }).then((data) => {
+     localStorage.setItem('email', JSON.stringify(data.data.data.data.email))
+    localStorage.setItem('user',JSON.stringify(data.data.data.data.name))
+    localStorage.setItem('profileUrl',JSON.stringify(data.data.data.data.imageUrl))
+    localStorage.setItem('token', JSON.stringify(data.data.data.token))
+    Navigate("/list")
 
- const onLoginSuccess = async(res) => {
-    console.log(res)
-    await axios.post("https://alleventbackend.onrender.com/api/user/register", res.profileObj).then((res) => {
-      console.log(res)
-       
-      localStorage.setItem('token', JSON.stringify(res.data.data.token))
-      localStorage.setItem('user',JSON.stringify(res.data.data.data))
-      console.log(res)
-      Navigate("/list")
-    }).catch((error) => {
-       
-     })
-   
-};
-
-const onLoginFailure = (res) => {
-    console.log('Login Failed:', res);
-  };
+    }) 
   
-  useEffect(() => {
-    function start() {
-      gapi.client.init({
-        clientId: clientId,
-        scope: 'email',
-      });
-    }
+  } catch (err) {
+    console.log("data")
+    console.log(err);
+  }
+};
+  
+useEffect(() => {
+  getUser();
+},);
 
-    gapi.load('client:auth2', start);
-  }, []);
+ 
+  
+   
 
-
+  const googleAuth = () => {
+		window.open(
+			`${process.env.REACT_APP_API_URL}/auth/google/callback`,
+			"_self"
+		);
+	};
 
   return (
     <>
@@ -51,14 +47,10 @@ const onLoginFailure = (res) => {
         <div>
            <img src={event} alt="" className='homeImage'/>
         </div>
+        <div on onClick={googleAuth} className='logOut'>
+          Login With Gmail
+         </div>
          
-          <GoogleLogin
-              clientId={clientId}
-              buttonText="Sign In"
-              onSuccess={onLoginSuccess}
-              onFailure={onLoginFailure}
-              cookiePolicy={'single_host_origin'}
-              isSignedIn={true}>Login with Gmail</GoogleLogin>
         
       </div>
       <div className='headingHome'>

@@ -63,7 +63,7 @@ const AddEvent = () => {
   const saveData = async () => {
     setLoading(true)
       try {
-         await axios.post("https://alleventbackend.onrender.com/api/event/add", data,{ headers: {"Authorization" : `Bearer ${token}`} }).then((res) => {
+         await axios.post( `${process.env.REACT_APP_API_URL}/api/event/add`, data,{ headers: {"Authorization" : `Bearer ${token}`} }).then((res) => {
            setLoading(false)
            toast.success("Event Added Sucessfully!", {
             position: toast.POSITION.TOP_LEFT

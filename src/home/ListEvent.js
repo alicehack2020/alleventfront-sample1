@@ -12,11 +12,15 @@ const ListEvent = () => {
   const [selectedClient, setSelectedClient] = useState('date');
   const [locationFilter,setLocationFilter]=useState([])
   const [categoryFilter,setCategoryFilter]=useState([])
-  const [date,setDate]=useState()
-   
+  const [date, setDate] = useState()
   
-  const localUserData =JSON.parse(localStorage.getItem('user'))
-  const token =JSON.parse(localStorage.getItem('token'))
+  // const [token,setToken]=useState()
+  // const [localUserData,setlocalUserData]=useState()
+  let userName = JSON.parse(localStorage.getItem('user'))
+  let token = JSON.parse(localStorage.getItem('token'))
+
+  
+  
   
 
   let filter = {
@@ -24,9 +28,14 @@ const ListEvent = () => {
     "location": locationFilter,
   };
  
+ 
+  useEffect(() => {
+    loadData()
+  },[])
+
   const loadData = async () => {
     try {
-      await axios.post("https://alleventbackend.onrender.com/api/event/list", {},{ headers: {"Authorization" : `Bearer ${token}`} }).then((res) => {
+      await axios.post(`${process.env.REACT_APP_API_URL}/api/event/list`, {},{ headers: {"Authorization" : `Bearer ${token}`} }).then((res) => {
         setList(res.data.list)
         setCompleteData(res.data.list)
         setData(res.data.list)
@@ -37,12 +46,6 @@ const ListEvent = () => {
      
     }
   }
-  
-
-  useEffect(() => {
-    
-    loadData()
-  },[])
  
 
   useEffect(() => {
@@ -185,11 +188,13 @@ const ListEvent = () => {
     setData(arr)
   }
 
+ 
+
   return (
     <div className='list_Main'>
       <div>
         <p>
-          Hi {localUserData?.name} welcome to AllEvents
+          Hi {userName} welcome to AllEvents
         </p>
       </div>
       <div className='event_list_find'>

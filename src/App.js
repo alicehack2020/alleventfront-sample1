@@ -4,17 +4,20 @@ import NavBar from './nav/NavBar';
 import Login from "./home/Login"
 import ListEvent from "./home/ListEvent"
 import AddEvent from "./home/AddEvent"
-import Home from './home/Home';
+import Protected from './protect/Protected ';
+import NotFound from './home/NotFound';
+
 function App() {
    return (
     <> 
     <NavBar/>
     <Routes>
       <Route element={<Login/>} path="/"/>         
-      {/* <Route element={<Home />} path="/home" />   */}
-      <Route element={<AddEvent />} path="/add" />  
-      <Route element={<ListEvent/>} path="/list"/> 
-    </Routes>
+      <Route element={<NotFound/>} path="*"/>         
+      <Route path="/add" element={<Protected><AddEvent /></Protected>} /> 
+      <Route path="/list" element={<Protected><ListEvent /></Protected>} /> 
+
+     </Routes>
     </>
     
   );
