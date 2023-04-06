@@ -4,6 +4,7 @@ import "./AddEvent.css"
 import { ref, uploadBytesResumable, getDownloadURL } from "firebase/storage";
 import storage from "../config/firebaseconfig"
 import { Ring } from 'react-awesome-spinners'
+import urlInfo from '../config/constants';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css'
 const AddEvent = () => {
@@ -63,7 +64,7 @@ const AddEvent = () => {
   const saveData = async () => {
     setLoading(true)
       try {
-         await axios.post( `${process.env.REACT_APP_API_URL}/api/event/add`, data,{ headers: {"Authorization" : `Bearer ${token}`} }).then((res) => {
+         await axios.post( `${urlInfo.REACT_APP_API_URL}/api/event/add`, data,{ headers: {"Authorization" : `Bearer ${token}`} }).then((res) => {
            setLoading(false)
            toast.success("Event Added Sucessfully!", {
             position: toast.POSITION.TOP_LEFT

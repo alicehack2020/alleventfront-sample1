@@ -1,5 +1,7 @@
 import axios from 'axios'
 import React, { useEffect, useState } from 'react'
+import urlInfo from '../config/constants'
+
 import "./ListEvent.css"
 const ListEvent = () => {
   const [list, setList] = useState([])
@@ -13,7 +15,6 @@ const ListEvent = () => {
   const [locationFilter,setLocationFilter]=useState([])
   const [categoryFilter,setCategoryFilter]=useState([])
   const [date, setDate] = useState()
-  
   // const [token,setToken]=useState()
   // const [localUserData,setlocalUserData]=useState()
   let userName = JSON.parse(localStorage.getItem('user'))
@@ -35,7 +36,7 @@ const ListEvent = () => {
 
   const loadData = async () => {
     try {
-      await axios.post(`${process.env.REACT_APP_API_URL}/api/event/list`, {},{ headers: {"Authorization" : `Bearer ${token}`} }).then((res) => {
+      await axios.post(`${urlInfo.REACT_APP_API_URL}/api/event/list`, {},{ headers: {"Authorization" : `Bearer ${token}`} }).then((res) => {
         setList(res.data.list)
         setCompleteData(res.data.list)
         setData(res.data.list)
