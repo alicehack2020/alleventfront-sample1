@@ -11,8 +11,8 @@ root.render(
     
     <BrowserRouter>
     <Auth0Provider
-    domain={ process.env.domain}
-    clientId={process.env.clientId}
+    domain="dev-aubtjeu0ort13nat.us.auth0.com"
+    clientId="wRNAlbIWGv4Uxp6ywhwiAwxW8DJPU9in"
     authorizationParams={{
     redirect_uri: window.location.origin
     }}>
