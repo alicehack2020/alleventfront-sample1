@@ -1,10 +1,10 @@
 # Code
-FrontEnd Code:https://github.com/alicehack2020/alleventfront-sample1
-BackEndCode:https://github.com/alicehack2020/allEvent-Back-End
+FrontEnd Code:https://github.com/alicehack2020/alleventfront-sample1/tree/frontend_okta
+BackEndCode:https://github.com/alicehack2020/allEvent-Back-End/tree/backend_okta
 
 # Live
-FrontEnd:https://alleventfront-sample1.vercel.app/
-BackEnd:https://all-event-back-end.vercel.app/
+FrontEnd:https://allevent2io.netlify.app/
+BackEnd:https://alleventio.vercel.app/
 
 
 
