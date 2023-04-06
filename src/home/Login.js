@@ -1,10 +1,7 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect } from 'react'
 import { useNavigate } from 'react-router-dom'
 import "./Login.css"
-import gmail from "../img/gmail.png"
 import event from "../img/event.svg"
-import festival from "../img/festival.svg"
-import { GoogleLogin } from 'react-google-login';
 import urlInfo from '../config/constants'
 import axios from 'axios'
 const Login = () => {
