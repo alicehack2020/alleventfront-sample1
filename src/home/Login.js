@@ -6,27 +6,8 @@ import urlInfo from '../config/constants'
 import axios from 'axios'
 const Login = () => {
 const Navigate=useNavigate()
- const getUser = async () => {
-  // try {
-  //   const url = `${urlInfo.REACT_APP_API_URL}/auth/login/success`;
-  //   await axios.get(url, { withCredentials: true }).then((data) => {
-  //    localStorage.setItem('email', JSON.stringify(data.data.data.data.email))
-  //   localStorage.setItem('user',JSON.stringify(data.data.data.data.name))
-  //   localStorage.setItem('profileUrl',JSON.stringify(data.data.data.data.imageUrl))
-  //   localStorage.setItem('token', JSON.stringify(data.data.data.token))
-  //   Navigate("/list")
-
-  //   }) 
-  
-  // } catch (err) {
-  //   console.log("data")
-  //   console.log(err);
-  // }
-  // };
-  
-
-
-
+  const getUser = async () => { 
+    
   try {
     const info = await axios.get("https://alleventbackendupdated.onrender.com/auth/login/success").then((data) => {
    console.log(data)
@@ -37,8 +18,14 @@ const Navigate=useNavigate()
       Navigate("/list")
      }) 
   } catch (error) {
-    console.log(err);
+    console.log(error);
   }
+  }
+  
+  
+
+
+
   
 useEffect(() => {
   getUser();
