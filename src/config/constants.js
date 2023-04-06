@@ -1,4 +1,4 @@
 const urlInfo = {
-    REACT_APP_API_URL:"https://alleventbackendupdated.onrender.com"
+    REACT_APP_API_URL:"http://alleventbackendupdated.onrender.com"
 }
 export default urlInfo;
