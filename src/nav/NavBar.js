@@ -2,14 +2,26 @@ import React, { useEffect, useState } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
 import axios from 'axios'
 import urlInfo from '../config/constants'
+import { useAuth0 } from "@auth0/auth0-react";
 import "./nav.css"
+import LogoutButton from '../components/LogoutButton'
  const NavBar = () => {
  const [token,setToken] =useState()
-
+ const { logout } = useAuth0();
 const [login,setLogin]=useState(false)
   
   const navigation = useNavigate()
   
+   const logOutUser = () => {
+     localStorage.clear();
+     setLogin(false)
+     setTimeout(() => {
+      logout({ logoutParams: { returnTo: window.location.origin } })
+     }, 1000)
+     setTimeout(() => {
+      navigation("/")
+     },2000)  
+}
 
   useEffect(() => {
     if (token)
@@ -29,32 +41,8 @@ const [login,setLogin]=useState(false)
     }
   })
 
-    const logout = async () => {
-    //   try {
-    //     await axios.get(`${process.env.REACT_APP_API_URL}/auth/logout`,{ headers: {"Authorization" : `Bearer ${token}`} }).then((res) => {
-    //       localStorage.clear();
-    //       setLogin(false)
-    //       navigation('/')
-    //     }).catch((error) => {
-    //      console.log(error)
-    //    })
-    //  } catch (error) {
-       
-    //   } 
-      
-    localStorage.clear();
-    setLogin(false)
-      
-    window.open(
-			`${urlInfo.REACT_APP_API_URL}auth/logout`,
-			"_self"
-		);
-    
-	};
-
   return (
       <div className='nav_header'>
-      {/* <Link to="/home">Home</Link> */}
            
       <div>
         {
@@ -67,14 +55,8 @@ const [login,setLogin]=useState(false)
       </div>
       
       
-      {login ? <div onClick={logout} className='logOut'>
-        logout
-        {/* <GoogleLogout
-          clientId={clientId}
-          buttonText="Logout"
-          onLogoutSuccess={onLoginSuccess}
-        >
-        </GoogleLogout> */}
+      {login ? <div>
+         <button onClick={logOutUser} className='logOut'>logout</button>
       </div>:<div></div>}
     </div>
   )

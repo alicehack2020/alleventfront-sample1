@@ -17,7 +17,7 @@ const ListEvent = () => {
   const [date, setDate] = useState()
   // const [token,setToken]=useState()
   // const [localUserData,setlocalUserData]=useState()
-  let userName = JSON.parse(localStorage.getItem('user'))
+  let userName = JSON.parse(localStorage.getItem('name'))
   let token = JSON.parse(localStorage.getItem('token'))
 
   
@@ -189,6 +189,10 @@ const ListEvent = () => {
     setData(arr)
   }
 
+  const reset = () => {
+    setData(CompleteData)
+    loadLocation()
+  }
  
 
   return (
@@ -211,6 +215,7 @@ const ListEvent = () => {
            <input type="date" placeholder='select date' value={date} onChange={(e)=>{setDate(e.target.value)}} className="Date"/>
         </div>
         <button onClick={findbyDate}>find</button>
+        <button onClick={reset}>refresh</button>
       </div>
       <div className='list_event_filter_main'>
         <div>

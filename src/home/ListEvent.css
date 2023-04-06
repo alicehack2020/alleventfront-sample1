@@ -84,3 +84,27 @@ font-size: medium;
     justify-content: space-between;
     padding: 10px;
 }
+
+
+@media (max-width: 600px) {
+    .event_list_Main{
+        display: grid;
+        grid-template-columns:repeat(2, 1fr);
+        gap:20px;
+        align-items: center;
+        margin-left: 50px;
+        justify-content: center;
+    }
+}
+
+
+@media (max-width: 400px) {
+    .event_list_Main{
+        display: grid;
+        grid-template-columns:repeat(1, 1fr);
+        gap:20px;
+        align-items: center;
+        margin-left: 50px;
+        justify-content: center;
+    }
+}

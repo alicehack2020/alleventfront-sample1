@@ -5,6 +5,16 @@
     margin-top: 50px;
 }
 
+@media (max-width: 600px) {
+    .loginMain{
+        display: flex;
+        align-items: center;
+        justify-content: space-evenly;
+        margin-top: 50px;
+        flex-direction: column;
+    }
+  }
+
 .loginForm{
     width: 200px;
     align-items: center;
