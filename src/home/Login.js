@@ -37,7 +37,7 @@ useEffect(() => {
 
   const googleAuth = () => {
 		window.open(
-			`${urlInfo.REACT_APP_API_URL}auth/google/callback`,
+			`${urlInfo.REACT_APP_API_URL}/auth/google/callback`,
 			"_self"
 		);
 	};

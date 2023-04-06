@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
 import axios from 'axios'
+import urlInfo from '../config/constants'
 import "./nav.css"
  const NavBar = () => {
  const [token,setToken] =useState()
@@ -45,7 +46,7 @@ const [login,setLogin]=useState(false)
     setLogin(false)
       
     window.open(
-			`${process.env.REACT_APP_API_URL}auth/logout`,
+			`${urlInfo.REACT_APP_API_URL}auth/logout`,
 			"_self"
 		);
     
